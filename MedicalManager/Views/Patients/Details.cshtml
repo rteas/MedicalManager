@@ -1,0 +1,93 @@
+﻿@model MedicalManager.Models.Patient
+
+@{
+    ViewBag.Title = "Details";
+}
+<div>
+    <table class="=table">
+        <tr>
+            <td>
+                <h2>Patient: @Model.LastName, @Model.FirstName <a class="btn btn-default" href="/patients/edit/@Model.PatientId">Edit</a></h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>ID#: @Model.PatientId</strong>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Emergency Contact:</strong> @String.Format("{0:(###) ###-####}", Model.EmergencyContact)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="/rooms/details/@Model.RoomId">Room: @Model.RoomId</a> <strong>Phone:</strong> @String.Format("{0:###-####}", Model.Room.RoomPhoneNumber)
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <table class="table">
+        <tr>
+            <th colspan="2">Activities &nbsp; <a class="btn btn-default" href="/patients/edit/@Model.PatientId">Edit Activities</a></th>
+        </tr>
+
+        <tr>
+            <th>Activity</th>
+            <th>Activity Time</th>
+        </tr>
+        @foreach (var item in Model.ActivityRecords)
+        {
+            <tr>
+                <td>
+                    <a href="/activities/details/@item.ActivityId">@Html.DisplayFor(modelItem => item.Activity.ActivityType)</a>
+                </td>
+                <td>
+                    @String.Format("{0:##:##}", @item.Activity.ActivityTime)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div>
+    <table class="table">
+        <tr>
+            <th colspan="5"> Medical Record &nbsp; <a class="btn btn-default" href="/medicalrecords/patientmedrec/@Model.PatientId"> + Add Medicine</a></th>
+        </tr>
+        <tr>
+            <th>Medicine Type</th>
+            <th>Quantity</th>
+            <th>Meidcal Conditions</th>
+            <th>Medicine Time</th>
+            <th>&nbsp;</th>
+        </tr>
+        @foreach (var item in Model.MedicalRecords)
+        {
+            <tr>
+                <td>
+                    <a href="/medicines/details/@item.MedicineId">@item.Medicine.MedicineType </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Medicine.MedicineQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MedicalConditions)
+                </td>
+                <td>
+                    @String.Format("{0:##:##}", @item.MedicineTakeTime)
+                </td>
+                <td>
+                    <a class="btn btn-default" href="/medicalrecords/edit/@item.MedicalRecordId">Edit</a>
+                    <a class="btn btn-default" href="/medicalrecords/delete/@item.MedicalRecordId">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<p>
+    <a class="btn btn-default" href="/patients/index">Back to Patients</a>
+</p>

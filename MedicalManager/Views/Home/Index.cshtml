@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Pensioner Gardens</h1>
+    <p class="lead">Welcome to Pensioner Gardens!</p>
+    <p><a href="/home/about" class="btn btn-primary btn-lg">Need Help? &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Guests</h2>
+        <p>
+            View a patient's basic information. 
+        </p>
+        <p>
+            Must provide given id, first name, and last name.
+        </p>
+        <p><a class="btn btn-default" href="/patients/guestsearch">Go! &raquo;</a></p>
+    </div>
+    <div class="col-md-6">
+        <h2>Staff/Admin</h2>
+        <p>Manage patients/accounts.</p>
+        <a class="btn btn-default" href="/account/login">Go! &raquo;</a>
+    </div>
+
+</div>

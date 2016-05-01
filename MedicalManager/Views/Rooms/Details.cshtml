@@ -1,0 +1,34 @@
+﻿@model MedicalManager.Models.Room
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Room #@Model.RoomId <a class="btn btn-default" href="/rooms/edit/@Model.RoomId">Edit</a></h2> 
+
+<div>
+    <h4>Phone: @String.Format("{0:###-####}", Model.RoomPhoneNumber)</h4>
+    <hr />
+
+    <div>
+        <table class="table">
+            <tr>
+                <th>Patients</th>
+            </tr>
+            @{ 
+                foreach(var patient in Model.Patients)
+                {
+                    <tr>
+                        <td>
+                            <a href="/patients/details/@patient.PatientId">@patient.LastName, @patient.FirstName</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RoomId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MedicalManager.Models.MedicalRecord>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Medicine.MedicineType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patient.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MedicineTakeTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MedicalConditions)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Medicine.MedicineType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patient.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MedicineTakeTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MedicalConditions)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MedicalRecordId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MedicalRecordId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MedicalRecordId })
+        </td>
+    </tr>
+}
+
+</table>

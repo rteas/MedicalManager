@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MedicalManager.Models.Medicine>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<a href="/medicines/create" class="btn btn-default">+ Add new medicine</a>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MedicineType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MedicineQuantity)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MedicineType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MedicineQuantity)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MedicineId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MedicineId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MedicineId })
+        </td>
+    </tr>
+}
+
+</table>

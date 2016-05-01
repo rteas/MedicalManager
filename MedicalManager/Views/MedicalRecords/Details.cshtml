@@ -1,0 +1,50 @@
+﻿@model MedicalManager.Models.MedicalRecord
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MedicalRecord</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Medicine.MedicineType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Medicine.MedicineType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MedicineTakeTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MedicineTakeTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MedicalConditions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MedicalConditions)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MedicalRecordId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

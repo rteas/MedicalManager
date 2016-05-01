@@ -1,0 +1,103 @@
+﻿@model MedicalManager.Models.Patient
+
+@{
+    ViewBag.Title = "GuestSearch";
+}
+
+<br />
+
+<h2>Find a Patient</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+                ID: @Html.TextBox("id")
+                First Name: @Html.TextBox("FirstName")
+                Last Name: @Html.TextBox("LastName")
+                <input class="btn btn-info" type="submit" value="Search" />
+        </div>
+
+}
+
+@{
+    if (Model != null)
+    {
+        <div>
+            <table class="=table">
+                <tr>
+                    <td>
+                        <h2>Patient: @Model.LastName, @Model.FirstName</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Emergency Contact:</strong> @String.Format("{0:(###) ###-####}", Model.EmergencyContact)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Room: @Model.RoomId <strong>Phone:</strong> @String.Format("{0:###-####}", Model.Room.RoomPhoneNumber)
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <table class="table">
+                <tr>
+                    <th colspan="2">Activities</th>
+                </tr>
+
+                <tr>
+                    <th>Activity</th>
+                    <th>Activity Time</th>
+                </tr>
+                @foreach (var item in Model.ActivityRecords)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Activity.ActivityType)
+                        </td>
+                        <td>
+                            @String.Format("{0:##:##}", @item.Activity.ActivityTime)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <div>
+            <table class="table">
+                <tr>
+                    <th colspan="5"> Medical Record</th>
+                </tr>
+                <tr>
+                    <th>Medicine Type</th>
+                    <th>Meidcal Conditions</th>
+                    <th>Medicine Time</th>
+                    <th>&nbsp;</th>
+                </tr>
+                @foreach (var item in Model.MedicalRecords)
+                {
+                    <tr>
+                        <td>
+                            @item.Medicine.MedicineType
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MedicalConditions)
+                        </td>
+                        <td>
+                            @String.Format("{0:##:##}", @item.MedicineTakeTime)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

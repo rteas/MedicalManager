@@ -1,0 +1,79 @@
+﻿@model IEnumerable<MedicalManager.Models.Patient>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
+
+@{
+    ViewBag.Title = "Patients";
+}
+
+<h2>Patients</h2>
+
+<a href="/patients/create" class="btn btn-default">+ Add a patient</a>
+
+@using (Html.BeginForm())
+{
+    <div class="form-inline">
+        <div class="form-group">
+            <p>
+                Search by Last Name: @Html.TextBox("SearchName")
+                <input class="btn btn-default" type="submit" value="Search" />
+            </p>
+        </div>
+    </div>
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Id", "Index", new { sortOrder = ViewBag.IdSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FirstNameSortParam})
+        </th>
+        <th>
+            @Html.ActionLink("Room", "Index", new { sortOrder = ViewBag.RoomSortParam })
+        </th>
+        <th>
+            Room Phone
+        </th>
+        <th>
+            Emergency Contact
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <a href="/patients/details/@item.PatientId">@item.PatientId</a>
+        </td>
+        <td>
+            <a href="/patients/details/@item.PatientId">@item.LastName</a>
+        </td>
+        <td>
+            <a href="/patients/details/@item.PatientId">@item.FirstName</a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Room.RoomId)
+        </td>
+        <td>
+            @String.Format("{0: ###-####}", item.Room.RoomPhoneNumber)
+        </td>
+        <td>
+            @String.Format("{0: (###) ###-####}", item.EmergencyContact)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PatientId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PatientId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PatientId })
+        </td>
+    </tr>
+}
+
+</table>
+
+
